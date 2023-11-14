@@ -271,10 +271,12 @@
     outline: none;
     @media (max-width: 425px) {    
       padding: 5px;
+      width: 100%;
     }
   }
   label{
     padding-bottom: 4px;
+    cursor: text;
   }
   .container{
     @include flexCenter();

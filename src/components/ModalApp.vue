@@ -170,26 +170,6 @@ import { setTransitionHooks } from 'vue';
                     this.valueInputBrand = ''
                     this.valueInputFlavor = ''
             },
-            
-            capitalizeFirstLetter(str) {
-                return str.charAt(0).toUpperCase() + str.slice(1);
-            },
-
-            formatInput(value) {
-                if (value) {
-                    // Remover caracteres indesejados e converter para maiúsculas apenas a primeira letra
-                    value = value.replace(/[^A-Za-zÀ-ú\s-]/g, '');
-                    value = this.capitalizeFirstLetter(value.trim());
-                }
-                return value;
-            },
-
-            validateInput(e) {
-                this.valueInputProduct = this.formatInput(this.valueInputProduct);
-                this.valueInputCategory = this.formatInput(this.valueInputCategory);
-                this.valueInputBrand = this.formatInput(this.valueInputBrand);
-                this.valueInputFlavor = this.formatInput(this.valueInputFlavor);
-            },
 
             SaveProductEdit(){
 

@@ -7,12 +7,12 @@
 
           <div class="container-field-label">
             <label for="search">Pesquise por produto</label>
-            <input type="text" id="search" placeholder="Ex: Refrigerante" v-model="searchFieldValue">
+            <input type="text" id="search" placeholder="Ex: Refrigerante" v-model="searchFieldValue" :disabled="fieldDisabled">
           </div>
 
           <div class="container-field-label">
             <label for="filter">Filtrar por</label>
-            <select id="filter" v-model="selectValueOrganize" @change="organizeProducts">
+            <select id="filter" v-model="selectValueOrganize" @change="organizeProducts" :disabled="fieldDisabled">
               <option value="1">Selecione um filtro</option>
               <option value="Menor preço">Menor preço</option>
               <option value="Maior preço">Maior preço</option>
@@ -21,7 +21,7 @@
             </select>
           </div>
           
-          <div>
+          <div class="container-clear-cart-button">
             <button class="clear-cart-button" @click="$emit('cleanShoppingCart')"><span class="material-symbols-outlined">clear_all</span>Limpar carrinho</button>
           </div>
 
@@ -102,15 +102,16 @@
       data(){
         return{
           searchedProducts: null,
-          searchFieldValue: '',
-          selectValueOrganize: '1',
+          fieldDisabled: true,
           modalWarning: false,
           modalWarningclose: false,
+          indexProduct: 0,
+          searchFieldValue: '',
+          selectValueOrganize: '1',
           titleWarning: 'Carrinho vazio!',
           titleClear: 'Sucesso!',
           warningMessage: 'coloque algum produto para poder limpar.',
-          clearMessage: 'Carrinho esvaziado',
-          indexProduct: 0
+          clearMessage: 'Carrinho esvaziado'
         }
       },
       methods:{ 
@@ -176,6 +177,12 @@
       computed: {
 
         productsToDisplay(){
+
+          if(!this.productData.length){
+            this.fieldDisabled = true
+          } else{
+            this.fieldDisabled = false
+          }
 
           if(this.searchFieldValue === ''){
 
@@ -258,6 +265,14 @@
           display: flex;
           align-items: center;
           flex-direction: column;
+
+          #search, #filter{
+            &:disabled{
+              cursor: not-allowed;
+              background-color: rgba(0,0,0,0.2);
+              opacity: 0.3;
+            }
+          }
         }
 
         .clear-cart-button{
@@ -303,6 +318,7 @@
               font-size: 20px;
               padding: 20px 10px;
               text-align: center;
+              text-transform: capitalize;
             }
             .container-actions-btns{
               padding: 0;
@@ -356,8 +372,19 @@
             flex-direction: column;
             align-items: center;
             gap: 20px;
-          }
+            width: 100%;
 
+            .container-field-label{
+              width: 100%;
+            }
+
+            .container-clear-cart-button{
+              width: 100%;
+              .clear-cart-button{
+                width: 100%;
+              }
+            }
+          }
           .text-total-value{
             font-size: 15px;
           }
