@@ -439,4 +439,41 @@
 
         
       }
+
+      @media only screen and (min-width: 426px) and (max-width: 768px) {
+        .container-cart{
+          width: auto;
+          height: 580px;
+          .container-table {
+
+            table{
+
+              thead{
+
+                th{
+                  font-size: 15px;
+                }
+
+              }
+              
+              tbody{
+                tr{
+                  td{
+                    font-size: 15px;
+                  }
+                }
+              }
+            }
+          }
+          .container-search-fields{
+            .container-clear-cart-button{
+              .clear-cart-button{
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+
+      
   </style>
