@@ -319,6 +319,13 @@
               padding: 20px 10px;
               text-align: center;
               text-transform: capitalize;
+              width: 12%;
+            }
+            td:first-child{
+              display: flex;
+              width: 200px;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
             .container-actions-btns{
               padding: 0;
