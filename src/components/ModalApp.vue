@@ -366,7 +366,7 @@ import AlertMessages from './AlertMessages.vue';
         
         .modal-add-product{
             align-items: baseline;
-            padding: 20px;
+            padding: 10px 0;
             .container-content{
                 width: 90vw;
 
@@ -379,7 +379,7 @@ import AlertMessages from './AlertMessages.vue';
 
                 .close-button{
                     top: auto;
-                    bottom: -50px;
+                    bottom: -40px;
                     right: auto;
                     background-color: white;
                     border-radius: 50%;
@@ -392,11 +392,11 @@ import AlertMessages from './AlertMessages.vue';
                     top: -51px;
                 }
                 .container-modal-edition{
-                    flex-direction: column;
-                    gap: 0;
+                    gap: 10px;
                     
                     .btns{
                         margin-top: 25px;
+                        width: auto;
                     }
                     .cancel-button{
                         display: none;

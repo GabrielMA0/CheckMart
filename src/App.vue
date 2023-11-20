@@ -228,7 +228,6 @@
 
   @mixin flexCenter(){
     display: flex;
-    justify-content: center;
     align-items: center;
   }
 
@@ -236,7 +235,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow: hidden;
     font-family: 'Outfit', sans-serif !important;
   }
 
@@ -252,8 +250,9 @@
     right: 0;
     z-index: -1;
   }
+  
   header{
-    margin-top: 20px;
+    margin-top: 10px;
   }
   h1,h2{
     font-family: 'Bad Script', cursive;
@@ -287,6 +286,7 @@
     margin: 0;
     padding: 0;
     width: 100% !important;
+    height: 100vh;
   }
   .btns{
     background-color: #3D5CFF;

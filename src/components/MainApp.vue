@@ -391,6 +391,8 @@
   .container-cart {
     width: 90vw;
     margin-top: 10px;
+    min-height: auto;
+    max-height: 100vh;
 
     h2{
       padding-bottom: 0;
