@@ -390,9 +390,10 @@
 
   .container-cart {
     width: 90vw;
+    margin-top: 10px;
 
     h2{
-      padding-bottom: 15px;
+      padding-bottom: 10px;
     }
 
     .grid-container-title{
@@ -408,8 +409,9 @@
     .container-search-fields {
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      gap: 10px;
       width: 100%;
+      margin-bottom: 15px;
 
       .container-field-label{
         width: 100%;

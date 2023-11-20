@@ -32,7 +32,6 @@
     }
     header{
 
-        @include flexCenter();
         gap: 20px;
         
         .container-header{
@@ -46,6 +45,9 @@
 
             @media (max-width: 425px) {    
                 width: 90vw;
+                gap: 5px;
+                height: auto;
+                padding: 20px 0;
             }
         }
     }    

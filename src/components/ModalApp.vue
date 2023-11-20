@@ -365,6 +365,8 @@ import AlertMessages from './AlertMessages.vue';
     @media (max-width: 425px){
         
         .modal-add-product{
+            align-items: baseline;
+            padding: 20px;
             .container-content{
                 width: 90vw;
 
