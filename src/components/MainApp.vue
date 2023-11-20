@@ -393,7 +393,7 @@
     margin-top: 10px;
 
     h2{
-      padding-bottom: 10px;
+      padding-bottom: 0;
     }
 
     .grid-container-title{
@@ -415,6 +415,8 @@
 
       .container-field-label{
         width: 100%;
+        flex-direction: row;
+        font-size: 15px;
         
         input, select{
           width: 100%;
