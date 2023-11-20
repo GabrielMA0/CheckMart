@@ -428,6 +428,8 @@
     }
     .text-total-value{
       font-size: 15px;
+      padding: 0;
+      margin-top: 20px;
     }
 
     .container-products{

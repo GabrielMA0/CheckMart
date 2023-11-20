@@ -369,9 +369,10 @@ import AlertMessages from './AlertMessages.vue';
                 width: 90vw;
 
                 form {
-                    flex-direction: column;
                     width: auto;
                     gap: 10px;
+                    height: 50vh;
+                    overflow: auto;
                 }
 
                 .close-button{

@@ -231,7 +231,8 @@
     justify-content: center;
     align-items: center;
   }
-  body{
+
+  body, html{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -240,8 +241,6 @@
   }
 
   .img-background{
-    width: 100vw !important;
-    height: 100vh !important;
     background-image: url("./assets/Background.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -261,7 +260,7 @@
     font-weight: bold !important;
   }
   h2{
-    font-size: 30px !important;
+    font-size: 30px;
     margin: 0;
   }
   button{
