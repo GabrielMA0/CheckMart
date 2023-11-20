@@ -2,7 +2,7 @@
   <div class="container">
     <div class="img-background"></div>
     <HeaderApp @openModal="openModal"/>
-    <ModalApp :modalOpen="modalOpen" :animationCloseModal="animationCloseModal" :sendProductData="receiveProductData" :modal="modal" :editProductData="editProductData" :indexProduct="indexProduct" :modalTypeAdd="modalTypeAdd" :modalTypeEdit="modalTypeEdit" :showAlertMessage="showAlertMessage" :showErrorMessage="showErrorMessage" :titleError="titleError" :errorMessage="errorMessage" :animationMessageError="animationMessageError" @removeProduct="removeProduct" @closeModal="closeModal" @SaveProductEdit="SaveProductEdit"/>
+    <ModalApp ref="setFieldsFromEditData" :modalOpen="modalOpen" :animationCloseModal="animationCloseModal" :sendProductData="receiveProductData" :modal="modal" :indexProduct="indexProduct" :modalTypeAdd="modalTypeAdd" :modalTypeEdit="modalTypeEdit" :showAlertMessage="showAlertMessage" :showErrorMessage="showErrorMessage" :titleError="titleError" :errorMessage="errorMessage" :animationMessageError="animationMessageError" @removeProduct="removeProduct" @closeModal="closeModal" @SaveProductEdit="SaveProductEdit"/>
     <MainApp :productData="productData" :showWarningMessage="showWarningMessage" :animationMessageWarning="animationMessageWarning" :showClearMessage="showClearMessage" :totalPurchaseValue="totalPurchaseValue" @removeProduct="removeProduct" @editProduct="editProduct" @cleanShoppingCart="cleanShoppingCart"/>
   </div>
 </template>
@@ -80,6 +80,9 @@
         this.modal = this.modalTypeEdit
         this.editProductData = product
         this.indexProduct = index
+
+        this.$refs.setFieldsFromEditData.setFieldsFromEditData(this.editProductData)
+
       },
 
       SaveProductEdit(editedProduct){
@@ -265,7 +268,8 @@
     cursor: pointer;
   }
   input, select{
-    padding: 10px;
+    padding: 0 10px;
+    height: 40px;
     border-radius: 10px;
     border: 1px solid black;
     outline: none;

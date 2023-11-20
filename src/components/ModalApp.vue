@@ -16,7 +16,7 @@
                     <form>
                         <div class="container-fields">
                             <label for="product-field">Produto <span class="asterisk">*</span></label>
-                            <input type="text" id="product-field" placeholder="Ex: Refrigerante" v-model="valueInputProduct" @input="validateInput" :class="{'field-error': fieldErrorProduct}">
+                            <input type="text" id="product-field" placeholder="Ex: Refrigerante" v-model= "valueInputProduct" :class="{'field-error': fieldErrorProduct}">
                         </div> 
                         
                         <div class="container-fields">
@@ -31,28 +31,28 @@
                         
                         <div class="container-fields">
                             <label for="category-field">Categoria <span class="asterisk">*</span></label>
-                            <input type="text" id="category-field" placeholder="Ex: Bebida" v-model="valueInputCategory" @input="validateInput" :class="{'field-error': fieldErrorCategory}">
+                            <input type="text" id="category-field" placeholder="Ex: Bebida" v-model="valueInputCategory" :class="{'field-error': fieldErrorCategory}">
                         </div>
                         
                         <div class="container-fields">
                             <label for="brand-field">Marca</label>
-                            <input type="text" id="brand-field" placeholder="Ex: Coca-cola" v-model="valueInputBrand" @input="validateInput">
+                            <input type="text" id="brand-field" placeholder="Ex: Coca-cola" v-model="valueInputBrand">
                         </div>
 
                         <div class="container-fields">
                             <label for="flavor-field">Sabor</label>
-                            <input type="text" id="flavor-field" placeholder="Ex: Morango" v-model="valueInputFlavor" @input="validateInput">
+                            <input type="text" id="flavor-field" placeholder="Ex: Morango" v-model="valueInputFlavor">
                         </div>
                     </form>
 
-                    <!-- INPUTS PARA EDITAR PRODUTO -->
+                    <!-- BOTÕES QUANDO FOR EDITAR PRODUTO -->
 
                     <div v-if="modal === modalTypeEdit" class="container-modal-edition">
                         <button class="btns edit-button" @click="SaveProductEdit">Salvar alteração</button>
                         <button class="btns cancel-button" @click="closeModal">Cancelar</button>
                         <button class="btns delete-button" @click="deleteProduct">Apagar produto</button>
                     </div>
-                    <button v-else class="btns" @click="addProduct">Adicionar</button>
+                    <button v-else class="btns" ref="btnAdd" @click="addProduct">Adicionar</button>
                 </div>
         
         </section>
@@ -64,11 +64,10 @@
 
 import {VMoney} from 'v-money'
 import AlertMessages from './AlertMessages.vue';
-import { setTransitionHooks } from 'vue';
 
     export default{
         name: 'ModalApp',
-        props:['modalOpen', 'sendProductData', 'editProductData', 'indexProduct', 'animationCloseModal', 'modal', 'modalTypeAdd', 'modalTypeEdit', 'showAlertMessage', 'showErrorMessage', 'titleError', 'errorMessage', 'animationMessageError'],
+        props:['modalOpen', 'sendProductData', 'indexProduct', 'animationCloseModal', 'modal', 'modalTypeAdd', 'modalTypeEdit', 'showAlertMessage', 'showErrorMessage', 'titleError', 'errorMessage', 'animationMessageError'],
         directives: {money: VMoney},
         components: {
             AlertMessages
@@ -76,7 +75,7 @@ import { setTransitionHooks } from 'vue';
 
         data(){
             return{
-                valueInputProduct: this.handleValueProduct ,
+                valueInputProduct: null ,
                 valueInputPrice: null,
                 valueInputAmount: null,
                 valueInputCategory: null,
@@ -85,10 +84,9 @@ import { setTransitionHooks } from 'vue';
                 fieldErrorProduct: false,
                 fieldErrorPrice: false,
                 fieldErrorAmount: false,
-                fieldErrorCategory: false,
+                fieldErrorCategory: false, 
 
                 products: [],
-                editedProduct: {},
 
                 inputValueConvertedPrice: 0,
 
@@ -102,16 +100,22 @@ import { setTransitionHooks } from 'vue';
             }
         },
 
+        mounted(){
+            document.addEventListener('keydown', this.activateEventsButton)
+
+        },
+
         watch:{
 
             valueInputProduct(){
                 this.fieldErrorProduct = false
+
             },
-            valueInputPrice(e){
+            valueInputPrice(){
                 this.fieldErrorPrice = false
 
             },
-            valueInputAmount(e){
+            valueInputAmount(){
                 this.fieldErrorAmount = false
 
             },
@@ -123,15 +127,8 @@ import { setTransitionHooks } from 'vue';
                 
                 if (this.modal === this.modalTypeAdd) {
                     this.clearFields();
-                } else {
-                    this.setFieldsFromEditData()
                 }
             },
-
-            editProductData(){
-                this.setFieldsFromEditData()
-            }
-
         },
 
         methods:{
@@ -176,7 +173,7 @@ import { setTransitionHooks } from 'vue';
                 if(this.fieldValidation()){
                     this.valueInputPriceConverted = parseFloat(this.valueInputPrice.slice(3).replace(",", "."))
                 
-                    this.editedProduct = {
+                    var editedProduct = {
                         productName: this.valueInputProduct,
                         price: this.valueInputPriceConverted,
                         amount: this.valueInputAmount,
@@ -186,7 +183,7 @@ import { setTransitionHooks } from 'vue';
                         flavor: this.valueInputFlavor
                     }   
 
-                    this.$emit('SaveProductEdit', this.editedProduct)
+                    this.$emit('SaveProductEdit', editedProduct)
                 }
             },
             
@@ -236,22 +233,36 @@ import { setTransitionHooks } from 'vue';
 
             },
 
-            setFieldsFromEditData() {
-                const { productName, price, amount, category, brand, flavor } = this.editProductData;
+            setFieldsFromEditData(editProductData) {
 
-                this.valueInputProduct = productName;
-                this.valueInputPrice = price.toFixed(2);
-                this.valueInputAmount = amount;
-                this.valueInputCategory = category;
-                this.valueInputBrand = brand;
-                this.valueInputFlavor = flavor;
+                this.valueInputProduct = editProductData.productName
+                this.valueInputPrice = editProductData.price.toFixed(2);
+                this.valueInputAmount = editProductData.amount
+                this.valueInputCategory = editProductData.category
+                this.valueInputBrand = editProductData.brand
+                this.valueInputFlavor = editProductData.flavor
+
             },
 
             deleteProduct(){
+
                 this.closeModal()
 
                 this.$emit('removeProduct', this.indexProduct )
-            }
+            },
+
+            activateEventsButton(e){
+
+                if(e.key === 'Enter' && this.modal === this.modalTypeAdd){
+                    this.addProduct()
+                }
+                if(e.key === 'Enter' && this.modal === this.modalTypeEdit){
+                    this.SaveProductEdit()
+                }
+                if(e.key === 'Escape'){
+                    this.closeModal()
+                }
+            },
         },
     }
 

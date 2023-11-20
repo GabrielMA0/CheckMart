@@ -6,8 +6,8 @@
         <div class="container-search-fields">
 
           <div class="container-field-label">
-            <label for="search">Pesquise por produto</label>
-            <input type="text" id="search" placeholder="Ex: Refrigerante" v-model="searchFieldValue" :disabled="fieldDisabled">
+            <label for="search">Pesquise por</label>
+            <input type="text" id="search" placeholder="Produto, categoria ou marca" v-model="searchFieldValue" :disabled="fieldDisabled">
           </div>
 
           <div class="container-field-label">
@@ -30,7 +30,40 @@
           <AlertMessages v-show="showClearMessage" :class="{'open-message-alert-warning': animationMessageWarning, 'close-message-alert-warning': !animationMessageWarning }" :titleClear="titleClear" :clearMessage="clearMessage"/>
         </div>
 
-        <div class="container-table">
+        <div class="grid-container-title">
+          <span class="grid-title">Produto</span>
+          <span class="grid-title">Valor</span>
+          <span class="grid-title">Qtda</span>
+          <span class="grid-title">Valor Total</span>
+          <span class="grid-title">Categoria</span>
+          <span class="grid-title">Marca</span>
+          <span class="grid-title">Sabor</span>
+          <span class="grid-title">Ações</span>
+        </div>
+
+        <div class="container-products">
+          <div class="grid-container" v-for="(product, index) in productsToDisplay" :key="index">
+          
+            <span class="grid-items">{{ product.productName }}</span>
+            <span class="grid-items">R$ {{ product.price }}</span>
+            <span class="grid-items">{{ product.amount }}</span>
+            <span class="grid-items">R$ {{ product.totalValueProduct }}</span>
+            <span class="grid-items">{{ product.category }}</span>
+            <span class="grid-items">{{ product.brand }}</span>
+            <span class="grid-items">{{ product.flavor }}</span>
+
+            <div class="container-actions-btns">
+              <button class="edit-button"><span class="material-symbols-outlined" title="Editar produto" @click="$emit('editProduct', product, index)">edit</span></button> 
+              <button class="delete-button" @click="openModalWarning(product, index)" title="Apagar produto"><span class="material-symbols-outlined">delete</span></button>
+              <button class="eye-button" @click="$emit('editProduct', product, index)"><span class="material-symbols-outlined">visibility</span></button>
+            </div>
+
+          </div>
+        </div>
+
+        
+
+        <!-- <div class="container-products">
           <table>
             <thead>
               <tr>
@@ -62,7 +95,7 @@
                 </tr>
             </tbody>
           </table>
-        </div>
+        </div> -->
         <span class="text-total-value">TOTAL DA COMPRA:<span>R$ {{ totalPurchaseValue }}</span></span>
       </div>
       
@@ -86,9 +119,9 @@
       </div>
     </main>
 
-  </template>
+</template>
   
-  <script>
+<script>
 
   import AlertMessages from './AlertMessages.vue';
 
@@ -198,10 +231,32 @@
 
       },
     }
-  </script>
+</script>
 
-  <style lang="scss" scoped>
+<style lang="scss" scoped>
 
+  .grid-container, .grid-container-title{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    width: 100%;
+    height: 65px;
+    border-bottom: 1px solid #ddd;
+    align-content: center;
+
+    .grid-items, .grid-title {
+      padding: 10px;
+      text-align: center;
+      text-transform: capitalize;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .grid-title{
+      font-weight: bold;
+      font-size: 20px;
+    }
+  }
+  
   // --BOOTSTRAP--
 
     .modal{
@@ -243,8 +298,8 @@
       border-radius: 20px;
       box-shadow: 5px 8px 21px rgba(0,0,0,0.2);
       padding: 20px;
-      width: 1000px;
-      height: 600px;
+      width: 1200px;
+      height: 70vh;
       margin-top: 20px;
       display: flex;
       flex-direction: column;
@@ -260,6 +315,7 @@
         gap: 32px;
         margin-bottom: 30px;
         align-items: end;
+        flex-wrap: wrap;
 
         .container-field-label{
           display: flex;
@@ -290,45 +346,15 @@
             }
         }
       }
-      .container-table{
+      .container-products{
         width: 100%;
         height: 100%;
         overflow-y: auto;
         overflow-x: hidden;
-
-        table{
-          border-collapse: collapse;
-          width: 100%;
-          margin: 0;
-          padding: 0;
-
-          th{
-            text-align: left;
-            text-decoration: underline;
-            font-size: 25px;
-            padding-bottom: 30px;
-            text-align: center;
-            border-bottom: 1px solid #DCDCDC;
-          }
-
-          tbody > tr{
-            border-bottom: 1px solid #DCDCDC;
-
-            td {
-              font-size: 20px;
-              padding: 20px 10px;
-              text-align: center;
-              text-transform: capitalize;
-              width: 12%;
-            }
-            td:first-child{
-              display: flex;
-              width: 200px;
-              overflow: hidden;
-              text-overflow: ellipsis;
-            }
             .container-actions-btns{
-              padding: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
               .edit-button, .delete-button, .eye-button{
                   border: none;
                   background: transparent;
@@ -347,7 +373,7 @@
             }
           }
         }
-      }
+
       .text-total-value{
         font-size: 25px;
         padding-top: 20px;
@@ -358,129 +384,85 @@
         }
       }
 
-    }
-
     // MOBILE
 
-    @media (max-width: 425px) {
-        thead {
+@media (max-width: 767px) {
+
+  .container-cart {
+    width: 90vw;
+
+    h2{
+      padding-bottom: 15px;
+    }
+
+    .grid-container-title{
+      display: none;
+    }
+    .grid-container{
+      grid-template-columns: repeat(3, 1fr) ;
+        span:nth-child(n+3){
+        display: none;
+        }
+    }
+
+    .container-search-fields {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+
+      .container-field-label{
+        width: 100%;
+        
+        input, select{
+          width: 100%;
+        }
+      }
+
+      .container-clear-cart-button{
+        width: 100%;
+        .clear-cart-button{
+          width: 100%;
+        }
+      }
+    }
+    .text-total-value{
+      font-size: 15px;
+    }
+
+    .container-products{
+      .container-actions-btns{
+        display: flex !important;
+        width: 100%;
+
+        .edit-button, .delete-button{
           display: none;
         }
-
-        .container-cart {
-          width: 90vw;
-          height: 580px;
-
-          h2{
-            padding-bottom: 15px;
-          }
-
-          .container-search-fields {
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            width: 100%;
-
-            .container-field-label{
-              width: 100%;
-            }
-
-            .container-clear-cart-button{
-              width: 100%;
-              .clear-cart-button{
-                width: 100%;
-              }
-            }
-          }
-          .text-total-value{
-            font-size: 15px;
-          }
-          
-          .container-table{
-            table{
-              
-              tbody{
-                
-                tr{
-
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-
-                  td:first-child{
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  }
-                  
-                  td{
-                    width: 33%;
-                    text-align: left;
-                    &:nth-child(n+3) {
-                      display: none;
-                    }
-                  }
-
-                  .container-actions-btns{
-                    display: flex !important;
-                    padding: 20px 10px;
-
-                    .edit-button, .delete-button{
-                      display: none;
-                    }
-                    .eye-button{
-                      opacity: 1;
-                      display: flex;  
-                      justify-content: center;
-                      align-items: center;
-                    }
-                  }
-                }
-
-                tr:first-child{
-                  border-top: 1px solid #DCDCDC;
-                }
-              }
-            }
-          }
-        }
-
-        
-      }
-
-      @media only screen and (min-width: 426px) and (max-width: 768px) {
-        .container-cart{
-          width: auto;
-          height: 580px;
-          .container-table {
-
-            table{
-
-              thead{
-
-                th{
-                  font-size: 15px;
-                }
-
-              }
-              
-              tbody{
-                tr{
-                  td{
-                    font-size: 15px;
-                  }
-                }
-              }
-            }
-          }
-          .container-search-fields{
-            .container-clear-cart-button{
-              .clear-cart-button{
-                font-size: 14px;
-              }
-            }
-          }
+        .eye-button{
+          opacity: 1;
+          display: flex;  
+          justify-content: center;
+          align-items: center;
         }
       }
+    }       
+  }
+}
 
-      
-  </style>
+      // TABLET
+
+@media only screen and (min-width: 768px) and (max-width: 1440px) {
+  .container-cart{
+    width: 95vw;
+
+    .container-search-fields{
+      .container-clear-cart-button{
+        .clear-cart-button{
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+</style>
