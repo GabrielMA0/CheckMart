@@ -236,17 +236,17 @@ export default {
             if (!this.valueInputProduct) {
                 this.fieldErrorProduct = true;
 
-                this.$refs.productField.focus();
+                this.$refs.productField.focus()
             }
             if (this.valueInputPrice === 'R$ 0,00' || this.valueInputPrice === '' || this.valueInputPrice.length === 0) {
                 this.fieldErrorPrice = true;
 
-                this.$refs.valueField.focus();
+                this.$refs.valueField.focus()
             }
             if (!this.valueInputAmount || this.valueInputAmount === null) {
                 this.fieldErrorAmount = true;
 
-                this.$refs.quantityField.focus();
+                this.$refs.quantityField.focus()
 
             }
             if (!this.valueInputProduct || this.valueInputPrice === 'R$ 0,00' || this.valueInputPrice === '' || this.valueInputPrice.length === 0 || !this.valueInputAmount) {
