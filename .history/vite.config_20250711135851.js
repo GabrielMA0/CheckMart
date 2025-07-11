@@ -11,12 +11,12 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'CheckMart',
-        short_name: 'CheckMart',
+        name: 'Meu App Vue',
+        short_name: 'AppVue',
         start_url: '/',
         display: 'standalone',
         background_color: '#ffffff',
-        theme_color: '#3D5CFF',
+        theme_color: '#42b983',
         icons: [
           {
             src: '/icons/icon-192x192.png',
