@@ -15,25 +15,21 @@
             <form>
                 <div class="container-fields">
                     <label for="product-field">Produto <span class="asterisk">*</span></label>
-                    <input ref="productField" type="text" id="product-field" placeholder="Ex: Refrigerante" v-model="valueInputProduct"
+                    <input type="text" id="product-field" placeholder="Ex: Refrigerante" v-model="valueInputProduct"
                         :class="{ 'field-error': fieldErrorProduct }">
-                        <span class="error-message" v-show="fieldErrorProduct">Preencha o campo obrigatório</span>
+                        <span v-show="fieldErrorProduct">Preencha o campo obrigatório</span>
                 </div>
 
                 <div class="container-fields">
                     <label for="value-field">Valor <span class="asterisk">*</span></label>
-                    <input ref="valueField" type="text" id="value-field" placeholder="Ex: R$ 5,00" v-model.lazy="valueInputPrice"
+                    <input type="text" id="value-field" placeholder="Ex: R$ 5,00" v-model.lazy="valueInputPrice"
                         v-money="money" @keydown="blockNegativeNumbers" :class="{ 'field-error': fieldErrorPrice }">
-                        <span class="error-message" v-show="fieldErrorPrice">Preencha o campo obrigatório</span>
-
                 </div>
 
                 <div class="container-fields">
                     <label for="quantity-field">Quantidade <span class="asterisk">*</span></label>
-                    <input ref="quantityField" type="number" id="quantity-field" placeholder="Ex: 3" min="0" v-model="valueInputAmount"
+                    <input type="number" id="quantity-field" placeholder="Ex: 3" min="0" v-model="valueInputAmount"
                         @keydown="blockNegativeNumbers" :class="{ 'field-error': fieldErrorAmount }">
-                        <span class="error-message" v-show="fieldErrorAmount">Preencha o campo obrigatório</span>
-
                 </div>
 
                 <div class="container-fields">
@@ -235,19 +231,14 @@ export default {
 
             if (!this.valueInputProduct) {
                 this.fieldErrorProduct = true;
-
-                this.$refs.productField.focus();
             }
             if (this.valueInputPrice === 'R$ 0,00' || this.valueInputPrice === '' || this.valueInputPrice.length === 0) {
                 this.fieldErrorPrice = true;
 
-                this.$refs.valueField.focus();
+                console.log(this.valueInputPrice)
             }
             if (!this.valueInputAmount || this.valueInputAmount === null) {
                 this.fieldErrorAmount = true;
-
-                this.$refs.quantityField.focus();
-
             }
             if (!this.valueInputProduct || this.valueInputPrice === 'R$ 0,00' || this.valueInputPrice === '' || this.valueInputPrice.length === 0 || !this.valueInputAmount) {
                 return false;
@@ -256,6 +247,18 @@ export default {
             }
 
         },
+
+        // setFieldsFromEditData(editProductData) {
+
+        //     this.valueInputProduct = editProductData.productName
+        //     this.valueInputPrice = editProductData.price.toFixed(2);
+        //     this.valueInputAmount = editProductData.amount
+        //     this.valueInputCategory = editProductData.category
+        //     this.valueInputBrand = editProductData.brand
+        //     this.valueInputFlavor = editProductData.flavor
+        //     this.valueInputWeight = editProductData.weight
+
+        // },
 
         deleteProduct() {
 
@@ -329,14 +332,13 @@ export default {
             flex-direction: row;
             flex-wrap: wrap;
             width: 503px;
-            gap: 25px;
+            gap: 20px;
 
             .container-fields {
                 display: flex;
                 flex-direction: column;
                 gap: 4px;
                 align-items: center;
-                position: relative;
 
                 .asterisk {
                     color: #3D5CFF;
@@ -344,13 +346,6 @@ export default {
 
                 label {
                     cursor: text;
-                }
-
-                .error-message{
-                    color: #EC3737;
-                    font-size: 12px;
-                    position: absolute;
-                    bottom: -20px;
                 }
             }
 
@@ -400,7 +395,7 @@ export default {
 
             form {
                 width: auto;
-                gap: 20px;
+                gap: 10px;
                 height: 50vh;
                 overflow: scroll;
             }
@@ -439,13 +434,4 @@ export default {
         }
     }
 }
-
-@media (max-width: 320px) {
-
-    .container-modal-edition {
-        flex-direction: column;
-    }
-}
-    
-
 </style>
