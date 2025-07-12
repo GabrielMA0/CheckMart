@@ -143,7 +143,6 @@
   }
 
   .img-background{
-    background-position: center;
     background-image: url("./assets/Background.svg");
     background-repeat: no-repeat;
     background-attachment: fixed;
