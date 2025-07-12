@@ -53,7 +53,7 @@
 
                 <div class="container-fields">
                     <label for="weight-field">Peso (KG/G)</label>
-                    <input type="number" id="weight-field" placeholder="Ex: 2" v-model="valueInputWeight" inputmode="numeric" pattern="\d*">
+                    <input type="number" id="weight-field" placeholder="Ex: 2" v-model="valueInputWeight">
                 </div>
             </form>
 

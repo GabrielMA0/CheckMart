@@ -30,7 +30,7 @@
 
                 <div class="container-fields">
                     <label for="quantity-field">Quantidade <span class="asterisk">*</span></label>
-                    <input ref="quantityField" type="number" id="quantity-field" inputmode="numeric" pattern="\d*" placeholder="Ex: 3" min="0" v-model="valueInputAmount"
+                    <input ref="quantityField" type="number" id="quantity-field" inputmode="numeric" placeholder="Ex: 3" min="0" v-model="valueInputAmount"
                         @keydown="blockNegativeNumbers" :class="{ 'field-error': fieldErrorAmount }">
                         <span class="error-message" v-show="fieldErrorAmount">Preencha o campo obrigatório</span>
 
@@ -53,7 +53,7 @@
 
                 <div class="container-fields">
                     <label for="weight-field">Peso (KG/G)</label>
-                    <input type="number" id="weight-field" placeholder="Ex: 2" v-model="valueInputWeight" inputmode="numeric" pattern="\d*">
+                    <input type="number" id="weight-field" placeholder="Ex: 2" v-model="valueInputWeight">
                 </div>
             </form>
 
