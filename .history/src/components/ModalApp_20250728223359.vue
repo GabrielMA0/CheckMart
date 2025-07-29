@@ -426,6 +426,7 @@ export default {
 
                 .btns {
                     margin-top: 15px;
+                    width: auto;
                 }
 
                 .cancel-button {

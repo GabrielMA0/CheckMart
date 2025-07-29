@@ -422,10 +422,11 @@ export default {
             }
 
             .container-modal-edition {
-                gap: 5px;
+                gap: 10px;
 
                 .btns {
-                    margin-top: 15px;
+                    margin-top: 25px;
+                    width: auto;
                 }
 
                 .cancel-button {
