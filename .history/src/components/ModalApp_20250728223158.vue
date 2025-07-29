@@ -361,7 +361,6 @@ export default {
         .btns {
             width: 166px;
             height: 36px;
-            margin-top: 34px;
             box-shadow: 3px 3px 4px rgba(0, 0, 0, 25%);
         }
 
@@ -422,10 +421,10 @@ export default {
             }
 
             .container-modal-edition {
-                gap: 5px;
+                gap: 10px;
 
                 .btns {
-                    margin-top: 15px;
+                    width: auto;
                 }
 
                 .cancel-button {
