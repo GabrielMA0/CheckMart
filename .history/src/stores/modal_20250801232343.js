@@ -1,0 +1,33 @@
+// src/stores/cart.js
+import { defineStore } from 'pinia'
+
+import { useCartStore } from './cart'
+
+export const useModalStore = defineStore('modal', {
+    state: () => ({
+        modal: false,
+        typeModal: 'adicionar',
+        modalAnimation: false
+    }),
+    actions: {
+        editProduct(index) {
+            console.log(index)
+            this.handleModal('editar')
+            const cartStore = useCartStore()
+            cartStore.indexProduct = index
+        },
+        handleModal(type) {
+            console.log(type)
+            if (this.modal) {
+                setTimeout(() => {
+                    this.modal = false
+                }, 450);
+
+            } else {
+                this.modal = true
+            }
+            this.typeModal = type || this.typeModal
+            this.modalAnimation = !this.modalAnimation
+        }
+    }
+})
