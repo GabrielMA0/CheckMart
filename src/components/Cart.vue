@@ -2,11 +2,11 @@
   import { useCartStore } from '@/stores/cart'
   import { useModalStore } from '@/stores/modal'
   import Subtitle from './Subtitle.vue'
-  import Input from './Input.vue'
+  import CustomInput from './CustomInput.vue'
+  import Container from './Container.vue'
   
   import { ref, computed } from 'vue'
 
-  const searchedProducts = ref(null)
   const modalWarning = ref(false)
   const modalWarningclose = ref(false)
   const indexProduct = ref(0)
@@ -55,27 +55,48 @@
   }
 
   const productsToDisplay = computed(() => {
+  const search = searchFieldValue.value.toLowerCase().trim()
+  let products = cartProducts.products ?? []
 
-    if (searchFieldValue.value === '') {
-      return cartProducts.products ?? []
-    } else {
-      return searchedProducts.value = cartProducts.products.filter(product =>
-        product.productName.toLowerCase().includes(searchFieldValue.value.toLowerCase()) ||
-        product.category?.toLowerCase().includes(searchFieldValue.value.toLowerCase()) ||
-        product.brand?.toLowerCase().includes(searchFieldValue.value.toLowerCase())
-      )
-    }
-  })
+  // filtro por busca
+  if (search) {
+    products = products.filter(product =>
+      product.productName.toLowerCase().includes(search) ||
+      product.category?.toLowerCase().includes(search) ||
+      product.brand?.toLowerCase().includes(search)
+    )
+  }
+
+  // ordenação
+  switch (selectValueOrganize.value) {
+    case 'Menor preço':
+      products = [...products].sort((a, b) => a.price - b.price)
+      break
+    case 'Maior preço':
+      products = [...products].sort((a, b) => b.price - a.price)
+      break
+    case 'Ordem Alfabética A-Z':
+      products = [...products].sort((a, b) => a.productName.localeCompare(b.productName))
+      break
+    case 'Ordem Alfabética Z-A':
+      products = [...products].sort((a, b) => b.productName.localeCompare(a.productName))
+      break
+  }
+
+  return products
+})
+
+
 
 </script>
 
 <template>
   <section v-show="cartProducts.products.length">
-    <div class="container-cart">
+    <Container class="container-cart">
       <Subtitle>Carrinho</Subtitle>
 
       <div class="container-search-fields">
-        <Input
+        <CustomInput
         label="Pesquise por"
         type="text"
         id="search"
@@ -138,7 +159,7 @@
       </div>
 
       <span class="text-total-value">TOTAL DA COMPRA:<span>R$ {{ cartProducts.totalPurchaseValue }}</span></span>
-    </div>
+    </Container>
 
     <!-- MODAL BOOTSTRAP -->
     <div v-show="modalWarning" class="modal" @click="closeModalWarning" tabindex="-1">
@@ -214,17 +235,10 @@
 
 // --BOOTSTRAP--
 .container-cart {
-  background-color: white;
-  border-radius: 20px;
-  box-shadow: 5px 8px 21px rgba(0, 0, 0, 0.2);
   padding: 20px;
   max-width: 1200px;
   height: 70vh;
   margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
 
   .container-search-fields {
     display: flex;
@@ -333,7 +347,6 @@
 
       .container-field-label {
         width: 100%;
-        font-size: 15px;
 
         input,
         select {
