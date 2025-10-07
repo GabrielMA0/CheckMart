@@ -46,7 +46,7 @@ const handleInput = (event) => {
   <div class="container-field">
     <label :for="id">
       {{ label }}
-      <span v-show="isRequired" class="asterisk">*</span>
+      <span v-if="isRequired" class="asterisk">*</span>
     </label>
 
     <input
@@ -81,7 +81,7 @@ const handleInput = (event) => {
       :class="{ 'field-error': hasError }"
     />
 
-    <span class="error-message" v-show="hasError">{{ messageError }}</span>
+    <span class="error-message" v-if="hasError">{{ messageError }}</span>
   </div>
 </template>
 
@@ -96,11 +96,6 @@ const handleInput = (event) => {
 
   .asterisk {
     color: #3d5cff;
-  }
-
-  label {
-    padding-bottom: 4px;
-    cursor: text;
   }
 
   .error-message {

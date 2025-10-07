@@ -212,7 +212,7 @@ const compareProduct = handleSubmit((values) => {
   <Container>
     <Subtitle>{{ !showResult ? 'Comparar produtos' : 'Resultado' }}</Subtitle>
 
-    <form v-show="!showResult" @submit.prevent="compareProduct">
+    <form v-if="!showResult" @submit.prevent="compareProduct">
       <div class="container-fields">
         <!-- Produto 1 -->
         <div class="container-product">
@@ -259,7 +259,7 @@ const compareProduct = handleSubmit((values) => {
       </div>
     </form>
 
-    <section v-show="showResult" class="container-section-result">
+    <section v-if="showResult" class="container-section-result">
       <div class="container-result">
         <div
           v-for="(p, i) in comparedProducts.products"

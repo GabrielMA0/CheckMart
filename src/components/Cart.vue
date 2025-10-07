@@ -91,7 +91,7 @@
 </script>
 
 <template>
-  <section v-show="cartProducts.products.length">
+  <section v-if="cartProducts.products.length">
     <Container class="container-cart">
       <Subtitle>Carrinho</Subtitle>
 
@@ -162,7 +162,7 @@
     </Container>
 
     <!-- MODAL BOOTSTRAP -->
-    <div v-show="modalWarning" class="modal" @click="closeModalWarning" tabindex="-1">
+    <div v-if="modalWarning" class="modal" @click="closeModalWarning" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content"
           :class="{ 'open-modal-animation': modalWarning, 'close-modal-animation': modalWarningclose }">
