@@ -137,7 +137,7 @@ const blockNegativeNumbers = (e) => {
 </script>
 
 <template>
-  <section class="modal-product" v-show="modalStore.modal">
+  <section class="modal-product" v-if="modalStore.modal">
     <div class="background" @click="modalStore.handleModal(modalStore.typeModal)"></div>
     <div
       class="container-content"

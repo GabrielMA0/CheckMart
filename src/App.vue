@@ -107,7 +107,10 @@
 
   input[type="checkbox"]{
     height: auto;
+    padding: 0;
+    width: auto;
   }
+  
   .background{
     width: 100vw;
     height: 100vh;
