@@ -8,7 +8,7 @@
 </script>
 
 <template>
-    <Container>
+    <Container class="container-header">
         <h1>CheckMart</h1>
         <CustomButton @click="modalStore.handleModal('adicionar')">Adicionar Produto</CustomButton>
         <router-link to="/compare-product">
@@ -18,4 +18,11 @@
 </template>
 
 <style lang="scss" scoped>
+    .container-header{
+        width: 388px;
+
+        @media (max-width: 425px) {    
+            width: 90vw;
+        }
+    }
 </style>

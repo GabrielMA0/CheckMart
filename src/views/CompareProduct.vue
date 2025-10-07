@@ -295,7 +295,7 @@ const compareProduct = handleSubmit((values) => {
 </template>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 form {
   display: flex;
   flex-direction: column;
@@ -341,6 +341,10 @@ form {
       cursor: pointer;
     }
   }
+  @media (max-width: 425px) {    
+    gap: 10px;
+  }
+  
 }
 .container-btns {
   display: flex;
