@@ -277,7 +277,7 @@ const blockNegativeNumbers = (e) => {
   top: 0px;
   left: 0px;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   @include flexCenter();
 
   .container-content {

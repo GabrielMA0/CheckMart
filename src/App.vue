@@ -15,15 +15,12 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: -1;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    min-height: 100dvh;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
   }
 
   // ---ANIMAÇÕES---
@@ -99,8 +96,14 @@
     border-radius: 10px;
     border: 1px solid black;
     outline: none;
-    @media (max-width: 425px) {    
+    
+    @media (max-width: 767px) {    
       padding: 5px;
+    }
+  }
+  
+  #search{
+    @media (max-width: 767px) {    
       width: 100%;
     }
   }
@@ -113,7 +116,7 @@
   
   .background{
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     position: absolute;
     top: 0;
     left: 0;

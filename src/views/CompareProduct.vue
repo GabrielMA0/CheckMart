@@ -152,13 +152,13 @@ const calculatePricePerUnit = (product, { unitCheckbox, volumeLTCheckbox, volume
     return product.price / product.volumeLT
   }
   if (volumeMLCheckbox && product.volumeML) {
-    return product.price / (product.volumeML / 1000)
+    return product.price / product.volumeML
   }
   if (weightKGCheckbox && product.weightKG) {
     return product.price / product.weightKG
   }
   if (weightGCheckbox && product.weightG) {
-    return product.price / (product.weightG / 1000)
+    return product.price / product.weightG
   }
   return null
 }
@@ -296,11 +296,12 @@ const compareProduct = handleSubmit((values) => {
 
 
 <style lang="scss" scoped>
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 
 .container-fields {
   display: flex;
@@ -314,6 +315,10 @@ form {
     flex-direction: column;
     align-items: center;
     gap: 20px;
+
+    @media (max-width: 425px) {  
+      width: 100%;
+    }
 
     .title-product {
       font-weight: bold;
@@ -356,21 +361,27 @@ form {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  max-width: 100%;
 
   .container-result {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
     border-bottom: 1px solid #dcdcdc;
     border-top: 1px solid #dcdcdc;
     padding: 20px 0;
 
+    @media (max-width: 425px) {    
+      flex-direction: column;
+    }
+
     .container-result-product {
       display: flex;
       flex-direction: column;
       gap: 20px;
       text-transform: capitalize;
+      overflow-wrap: anywhere;
+      width: 100%;
     }
   }
 
@@ -379,6 +390,15 @@ form {
     flex-direction: column;
     align-items: center;
     gap: 20px;
+
+    @media (max-width: 425px) {    
+      align-items: flex-start;
+    }
+
+    span{
+      overflow-wrap: break-word;
+      max-width: 100%;
+    }
 
     .container-best-option-btns {
       display: flex;

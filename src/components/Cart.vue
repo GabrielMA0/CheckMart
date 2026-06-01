@@ -221,7 +221,7 @@
   &::before {
     content: '';
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.5);
   }
@@ -320,7 +320,7 @@
     width: 90vw;
     margin-top: 10px;
     min-height: auto;
-    max-height: 100vh;
+    max-height: 100dvh;
 
     h2 {
       padding-bottom: 0;

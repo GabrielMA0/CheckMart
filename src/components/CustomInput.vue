@@ -93,6 +93,10 @@ const handleInput = (event) => {
   gap: 4px;
   align-items: center;
   position: relative;
+  
+  @media (max-width: 767px) {    
+    width: 100%;
+  }
 
   .asterisk {
     color: #3d5cff;
