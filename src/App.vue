@@ -9,20 +9,24 @@
   @import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-  #app{
-    background-position: center;
-    background-image: url("./assets/Background.svg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+  html,
+body {
+  margin: 0;
+  padding: 0;
+  background-position: center;
+  background-image: url("./assets/Background.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#app {
     display: flex;
     flex-direction: column;
     justify-content: center;
     min-height: 100dvh;
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
-  }
-
+}
   // ---ANIMAÇÕES---
     @keyframes slide-bottom {
         0% {
@@ -101,7 +105,7 @@
       padding: 5px;
     }
   }
-  
+
   #search{
     @media (max-width: 767px) {    
       width: 100%;
